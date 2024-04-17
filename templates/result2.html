@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('../static/assets/result\ page.jpg');
+            /* Add your background image path here */
+            background-size: cover;
+            background-position: bottom;
+            /* Adjust background position to cover from bottom to top */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* White background with transparency */
+            border: 2px solid #007bff;
+            /* Blue border */
+            border-radius: 20px;
+            padding: 40px;
+            /* Increased padding */
+            max-width: 60%;
+            /* Increased max width */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Increased shadow effect */
+        }
+
+        .previous-page-button {
+            margin-top: 20px;
+        }
+
+        .previous-button {
+            align-items: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            /* Smaller padding */
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .model-result {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .model-label {
+            font-weight: bold;
+        }
+
+        .previous-page-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ model }} Prediction Result</h1>
+        <div class="result">Predicted Class: {{ prediction }}</div>
+        <div class="previous-page-button">
+            <button type="button" class="previous-button" onclick="goBack()">Previous Page</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

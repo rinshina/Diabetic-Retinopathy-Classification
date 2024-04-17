@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Retinopathy Classification</title>
+    <style>
+        body {
+            background-image: url('../static/assets/homeindwx.jpg');
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Lato', sans-serif;
+
+        }
+
+        h1 {
+            color: #ffffff;
+            /* Whitish color */
+            font-size: 36px;
+            /* Increased font size */
+            margin-bottom: 20px;
+            font-weight: bold;
+            /* Bold text */
+            background-color: rgba(100, 100, 100, 0.7);
+            /* Gray background color with some transparency */
+            padding: 10px 20px;
+            /* Add padding to the h1 */
+            border-radius: 10px;
+            /* Add border radius for rounded corners */
+        }
+
+        .container {
+            width: 500px;
+            padding: 20px;
+            background-color: #add8e6;
+            /* Light blue background color */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            /* Increased blur radius for shadow */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            /* Ensure content doesn't overflow */
+
+        }
+
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333;
+            font-family: 'Lato', sans-serif;
+            font-weight: bold;
+            /* Dark gray color */
+        }
+
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #004080;
+            /* Dark Blue */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #002266;
+            /* Darker shade of blue */
+        }
+
+        .quotation {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quotation::before,
+        .quotation::after {
+            content: '"';
+            font-size: 32px;
+            color: #007bff;
+            /* Blue color */
+            position: absolute;
+        }
+
+        .quotation::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .quotation::after {
+            bottom: -10px;
+            right: -10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to the Diabetic Retinopathy Classification System</h1>
+    <div class="container">
+
+        <p class="quotation">Revolutionizing vision care, our system brings brighter tomorrows</p>
+
+        <a href="/index" class="btn">Scan for Diagnosis</a>
+    </div>
+</body>
+
+</html>

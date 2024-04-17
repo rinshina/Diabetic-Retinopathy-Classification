@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Retinopathy Result</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            /* Light gray background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('../static/assets/result\ page.jpg');
+            /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            /* White background with transparency */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Shadow effect */
+            max-width: 80%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+            /* Blue color for headings */
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            color: #007bff;
+            /* Blue color for subheadings */
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .home-button {
+            background-color: #007bff;
+            /* Blue color */
+            color: #fff;
+            /* White text */
+            padding: 10px 20px;
+            /* Padding */
+            border-radius: 5px;
+            /* Rounded corners */
+            text-decoration: none;
+            /* No underline */
+            font-size: 16px;
+            /* Font size */
+            margin-top: 20px;
+            /* Spacing */
+            display: inline-block;
+            /* Display as block element */
+            transition: background-color 0.3s ease;
+            /* Smooth color transition */
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+            /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Diabetic Retinopathy Prediction Result</h1>
+        <div id="prediction-results">
+            {% if vgg16_result %}
+            <h3>VGG16 Prediction:</h3>
+            <p>{{ vgg16_result }}</p>
+            {% endif %}
+            {% if resnet_result %}
+            <h3>ResNet Prediction:</h3>
+            <p>{{ resnet_result }}</p>
+            {% endif %}
+            {% if densenet_result %}
+            <h3>DenseNet Prediction:</h3>
+            <p>{{ densenet_result }}</p>
+            {% endif %}
+        </div>
+        <a href="/" class="home-button">Home</a>
+    </div>
+</body>
+
+</html>

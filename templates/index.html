@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('../static/assets/Designer.png');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            height: 100vh;
+            /* Set height to viewport height */
+        }
+
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 60%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #file-label {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            /* Smaller padding */
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            /* Reserve space for filename */
+            width: 250px;
+            display: inline-block;
+        }
+
+        #file-label:hover {
+            background-color: #0056b3;
+        }
+
+        #preview-image {
+            display: none;
+            /* Hide the image preview */
+        }
+
+        #upload-button-container {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        .upload-button {
+            align-items: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px 30px;
+            /* Smaller padding */
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px;
+            /* Add margin to the right side of each button */
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #0056b3;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            /* Adjust left position */
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 999;
+            /* Ensure the button is above other elements */
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload-container">
+        <h2 style="margin-bottom: 20px;">Upload Your Image</h2>
+        <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+            <label for="file-input" id="file-label">Choose File</label>
+            <input type="file" id="file-input" name="file" accept="image/*">
+            <span id="file-name" style="display: block; margin-top: 10px;"></span>
+            <!-- Display the filename here -->
+            <div id="upload-button-container">
+                <!-- Buttons for each model -->
+                <button type="button" class="upload-button" style="width: 150px;"
+                    onclick="predictModel('vgg16')">VGG16</button>
+                <button type="button" class="upload-button" style="width: 150px;"
+                    onclick="predictModel('resnet')">ResNet</button>
+                <button type="button" class="upload-button" style="width: 150px;"
+                    onclick="predictModel('densenet')">DenseNet121</button>
+            </div>
+            <!-- Hidden input field to store selected model -->
+            <input type="hidden" id="selected-model" name="model">
+        </form>
+        <form id="compare-models" action="/compare" method="post" enctype="multipart/form-data">
+            <!-- No file input in this form -->
+            <div id="compare-button-container">
+                <button type="button" class="upload-button" onclick="compare()">Compare</button>
+            </div>
+        </form>
+        <div id="prediction-results">
+            <!-- Your prediction results -->
+        </div>
+        <a href="/" class="home-button">Home</a>
+    </div>
+
+    <script>
+        // Global variable to store uploaded file
+        var uploadedFile;
+
+        // Function to submit form with selected model
+        function predictModel(model) {
+            var form = document.getElementById('upload-form');
+            document.getElementById('selected-model').value = model;
+            form.submit();
+        }
+
+        // Function to set the uploaded file when it changes
+        document.getElementById("file-input").addEventListener("change", function () {
+            // Retrieve the selected file
+            var selectedFile = this.files[0];
+
+            // Display the filename
+            document.getElementById('file-name').innerText = selectedFile.name;
+
+            // Store the selected file in the global variable
+            uploadedFile = selectedFile;
+        });
+
+        // Function to submit compare form
+        function compare() {
+            if (uploadedFile) {
+                var form = document.getElementById('compare-models');
+                // Append the uploaded file to the form data
+                var formData = new FormData(form);
+                formData.append('file', uploadedFile);
+                // Submit the form
+                fetch('/compare', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Redirect to compare.html with the comparison results
+                        window.location.href = '/compare?results=' + encodeURIComponent(data);
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                // Alert the user to upload an image first
+                alert('Please upload an image first.');
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
